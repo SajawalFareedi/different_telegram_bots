@@ -29,68 +29,7 @@ const mdgBot = async (browser, page) => {
             "confirmationText": "#ContentPlaceHolder1_lblName",
         }
 
-        /**
-        Alabama	AL	
-        Kentucky	KY	
-        Ohio	OH
-        Alaska	AK	
-        Louisiana	LA	
-        Oklahoma	OK
-        Arizona	AZ	
-        Maine	ME	
-        Oregon	OR
-        Arkansas	AR	
-        Maryland	MD	
-        Pennsylvania	PA
-        American Samoa	AS	
-        Massachusetts	MA	
-        Puerto Rico	PR
-        California	CA	
-        Michigan	MI	
-        Rhode Island	RI
-        Colorado	CO	
-        Minnesota	MN	
-        South Carolina	SC
-        Connecticut	CT	
-        Mississippi	MS	
-        South Dakota	SD
-        Delaware	DE	
-        Missouri	MO	
-        Tennessee	TN
-        District of Columbia	DC	
-        Montana	MT	Texas	TX
-        Florida	FL	
-        Nebraska	NE	
-        Trust Territories	TT
-        Georgia	GA	
-        Nevada	NV	
-        Utah	UT
-        Guam	GU	
-        New Hampshire	NH	
-        Vermont	VT
-        Hawaii	HI	
-        New Jersey	NJ	
-        Virginia	VA
-        Idaho	ID	
-        New Mexico	NM	
-        Virgin Islands	VI
-        Illinois	IL	
-        New York	NY	
-        Washington	WA
-        Indiana	IN	
-        North Carolina	NC	
-        West Virginia	WV
-        Iowa	IA	
-        North Dakota	ND	
-        Wisconsin	WI
-        Kansas	KS	
-        Northern Mariana Islands	MP	
-        Wyoming	WY
-        */
-
-        const states = {
-            "NY": "51",
-        }
+        const states = { "AL": "17", "AR": "19", "AZ": "20", "CA": "21", "CO": "22", "CT": "23", "DC": "24", "DE": "25", "FL": "26", "GA": "27", "IA": "29", "ID": "30", "IL": "31", "IN": "32", "KS": "33", "KY": "34", "LA": "35", "MA": "36", "MD": "37", "ME": "38", "MI": "39", "MN": "40", "MO": "41", "MS": "42", "MT": "43", "NC": "44", "ND": "45", "NE": "46", "NH": "47", "NJ": "48", "NM": "49", "NV": "50", "NY": "51", "OH": "52", "OK": "53", "OR": "54", "PA": "55", "RI": "56", "SC": "57", "SD": "58", "TN": "59", "TX": "60", "UT": "61", "VA": "62", "VT": "63", "WA": "64", "WI": "65", "WV": "66", "WY": "67" };
 
         await page.goto("https://secure.mdg.com/Membership.aspx?t=0");
 
@@ -129,10 +68,19 @@ const mdgBot = async (browser, page) => {
     }
 }
 
-module.exports = async () => {
+// module.exports = async () => {
+//     const b = await createBrowser();
+//     if (!b) { console.error("Error while launching puppeteer browser!") };
+//     const { browser, page } = b;
+
+//     return await mdgBot(browser, page);
+// }
+
+(async () => {
     const b = await createBrowser();
     if (!b) { console.error("Error while launching puppeteer browser!") };
     const { browser, page } = b;
 
-    return await mdgBot(browser, page);
-}
+    const result = await mdgBot(browser, page);
+    console.log(result);
+})()

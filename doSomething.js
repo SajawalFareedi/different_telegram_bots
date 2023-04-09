@@ -19,6 +19,7 @@ const laddersBot = async (browser, page) => {
             "dob": "#birthdate",
             "gender": "#gender",
             "submitBtn": "#register-submit",
+            "submitBtn2": 'form#profile-subscriptions-form input[type="submit"]'
         }
 
         const genders = {
@@ -45,7 +46,10 @@ const laddersBot = async (browser, page) => {
         await page.click(selectors.submitBtn);
         await page.waitForSelector(selectors.phoneNumber, { timeout: 60000 });
 
+        await page.type(selectors.phoneNumber, data.phone);
+        await page.click(selectors.submitBtn2);
 
+        await page.waitForTimeout(1100);
 
         return "success";
 

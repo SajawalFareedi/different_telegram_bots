@@ -8,25 +8,25 @@ const getData = async () => {
 
         return {
             "id": "123456789",
-            "firstName": "xyz",
-            "lastName": "abc",
+            "firstName": "Harold G",
+            "lastName": "Aguayo",
             "dob": {
-                "day": "01",
-                "month": "01",
-                "year": "2000"
+                "day": "07",
+                "month": "10",
+                "year": "1994"
             },
             "gender": "M",
-            "ssn": "123-45-6789",
+            "ssn": "694-01-7392",
             "address": {
-                "street": "123 Main St",
-                "city": "Anytown",
-                "state": "NY",
-                "zip": "12345"
+                "street": "3609 Perine Street",
+                "city": "Centerville",
+                "state": "VA",
+                "zip": "22020"
             },
             "dl": "123232323",
-            "phone": "1234567890",
-            "email": "bobdylan6000@outlook.com",
-            "employer": "ABC corp",
+            "phone": "703-830-9931",
+            "email": "HaroldGAguayo@teleworm.us",
+            "employer": "Cut Rite",
             "income": 7200,
             "password": "VBghd#&^7272HH"
         }
