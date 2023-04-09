@@ -1,0 +1,11 @@
+{
+    "proxy": {
+        "server": "usa.rotating.proxyrack.net",
+        "port": 9000,
+        "auth": {
+            "username": "digitalvertexla",
+            "password": "8bbc4e-fefad1-a18b75-a9d1e3-57f472"
+        }
+    },
+    "2captchaApi": "a55b3257da95eb7886137c0ecd8aa4dd" 
+}
