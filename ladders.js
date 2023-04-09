@@ -1,6 +1,6 @@
 const { Browser, Page } = require("puppeteer");
 const createBrowser = require("./common");
-const { getData } = require("./utils");
+const { getData, sleep } = require("./utils");
 
 /**
  * @param {Browser} browser
@@ -18,19 +18,24 @@ const laddersBot = async (browser, page) => {
             "submitBtn": "form#create_customer button",
         }
 
-        await page.goto("https://www.littlegiantladders.com/account/register");
+        await page.goto("https://www.littlegiantladders.com/account/register", { waitUntil: "networkidle0" });
+        await sleep(0.6);
 
-        await page.type(selectors.email, data.email);
-        await page.type(selectors.password, data.password);
         await page.type(selectors.firstName, data.firstName);
         await page.type(selectors.lastName, data.lastName);
+        await page.type(selectors.email, data.email);
+        await page.type(selectors.password, data.password);
 
-        await page.click(selectors.submitBtn);
-        await page.waitForTimeout(1100);
+        const result = await page.solveRecaptchas();
+        console.info(result);
+
+        await page.$eval('#create_customer', form => form.submit());
+        await sleep(1.5);
 
         if (page.url().indexOf("/challenge") !== -1) {
             const result = await page.solveRecaptchas();
             console.info(result);
+            await page.$eval('input[type="submit"]', btn => btn.click());
         }
 
         return "success";
@@ -41,10 +46,19 @@ const laddersBot = async (browser, page) => {
     }
 }
 
-module.exports = async () => {
+// module.exports = async () => {
+//     const b = await createBrowser();
+//     if (!b) { console.error("Error while launching puppeteer browser!") };
+//     const { browser, page } = b;
+
+//     return await laddersBot(browser, page);
+// }
+
+(async () => {
     const b = await createBrowser();
     if (!b) { console.error("Error while launching puppeteer browser!") };
     const { browser, page } = b;
 
-    return await laddersBot(browser, page);
-}
+    const result = await laddersBot(browser, page);
+    console.log(result);
+})()

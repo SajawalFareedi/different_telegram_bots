@@ -1,10 +1,9 @@
-const fetch = require("node-fetch").default;
+const axios = require("axios").default;
 
 
 const getData = async () => {
     try {
-        // const data = await fetch("http://localhost:300/data", { method: "GET", headers: { "content-type": "application/json" } });
-        // return await data.json();
+        // return (await axios.get("http://localhost:3000/data", { headers: { "content-type": "application/json" } })).data;
 
         return {
             "id": "123456789",
@@ -24,16 +23,45 @@ const getData = async () => {
                 "zip": "22020"
             },
             "dl": "123232323",
-            "phone": "703-830-9931",
+            "phone": "7038309931",
             "email": "HaroldGAguayo@teleworm.us",
             "employer": "Cut Rite",
             "income": 7200,
             "password": "VBghd#&^7272HH"
         }
 
+        // return {
+        //     "id": "123456789",
+        //     "firstName": "David H",
+        //     "lastName": "Vega",
+        //     "dob": {
+        //         "day": "18",
+        //         "month": "09",
+        //         "year": "2003"
+        //     },
+        //     "gender": "M",
+        //     "ssn": "549-43-8765",
+        //     "address": {
+        //         "street": "2873 Cemetery Street",
+        //         "city": "San Francisco",
+        //         "state": "CA",
+        //         "zip": "94107"
+        //     },
+        //     "dl": "123232323",
+        //     "phone": "8317090396",
+        //     "email": "DavidHVega@armyspy.com",
+        //     "employer": "Mikro Designs",
+        //     "income": 7200,
+        //     "password": "VBghd#&^7272HH"
+        // }
+
     } catch (error) {
         console.error(error);
     }
 }
 
-module.exports = { getData };
+const sleep = (seconds) => {
+    return new Promise((resolve, reject) => { setTimeout(resolve, seconds * 1000) });
+}
+
+module.exports = { getData, sleep };

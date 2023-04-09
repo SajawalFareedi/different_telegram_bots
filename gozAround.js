@@ -1,6 +1,6 @@
 const { Browser, Page } = require("puppeteer");
 const createBrowser = require("./common");
-const { getData } = require("./utils");
+const { getData, sleep } = require("./utils");
 
 /**
  * @param {Browser} browser
@@ -22,16 +22,26 @@ const gozAroundBot = async (browser, page) => {
 
         await page.goto("https://www.gozaround.com/users/register");
 
+        await sleep(2.2);
+
+        await page.waitForSelector("#closeXButton", { timeout: 60000 }).catch(() => { });
+        await page.click("#closeXButton");
+
         await page.type(selectors.email, data.email);
         await page.type(selectors.password, data.password);
         await page.type(selectors.firstName, data.firstName);
         await page.type(selectors.lastName, data.lastName);
 
-        await page.click(selectors.agreeTerms);
+        await page.evaluate(() => {
+            document.querySelector("#terms_check").parentElement.click();
+        });
+
+        const result = await page.solveRecaptchas();
+        console.info(result);
 
         await page.click(selectors.submitBtn);
-        await page.waitForTimeout(1100);
-        
+        await sleep(1.5);
+
         await page.waitForSelector(selectors.confirmationText, { timeout: 60000 });
 
         return "success";

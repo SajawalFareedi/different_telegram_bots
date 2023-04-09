@@ -1,6 +1,6 @@
 const { Browser, Page } = require("puppeteer");
 const createBrowser = require("./common");
-const { getData } = require("./utils");
+const { getData, sleep } = require("./utils");
 
 /**
  * @param {Browser} browser
@@ -31,6 +31,9 @@ const mdgBot = async (browser, page) => {
 
         const states = { "AL": "17", "AR": "19", "AZ": "20", "CA": "21", "CO": "22", "CT": "23", "DC": "24", "DE": "25", "FL": "26", "GA": "27", "IA": "29", "ID": "30", "IL": "31", "IN": "32", "KS": "33", "KY": "34", "LA": "35", "MA": "36", "MD": "37", "ME": "38", "MI": "39", "MN": "40", "MO": "41", "MS": "42", "MT": "43", "NC": "44", "ND": "45", "NE": "46", "NH": "47", "NJ": "48", "NM": "49", "NV": "50", "NY": "51", "OH": "52", "OK": "53", "OR": "54", "PA": "55", "RI": "56", "SC": "57", "SD": "58", "TN": "59", "TX": "60", "UT": "61", "VA": "62", "VT": "63", "WA": "64", "WI": "65", "WV": "66", "WY": "67" };
 
+        const month = parseInt(data.dob.month).toString();
+        const day = parseInt(data.dob.day).toString();
+
         await page.goto("https://secure.mdg.com/Membership.aspx?t=0");
 
         await page.type(selectors.email, data.email);
@@ -39,8 +42,11 @@ const mdgBot = async (browser, page) => {
         await page.type(selectors.lastName, data.lastName);
 
         await page.select(selectors.dobYear, data.dob.year);
-        await page.select(selectors.dobMonth, parseInt(data.dob.month).toString());
-        await page.select(selectors.dobDay, parseInt(data.dob.day).toString());
+        await sleep(0.7)
+        await page.select(selectors.dobMonth, month);
+        await sleep(0.7)
+        await page.select(selectors.dobDay, day);
+        await sleep(0.2)
 
         await page.type(selectors.address, data.address.street);
         await page.type(selectors.city, data.address.city);
@@ -50,13 +56,15 @@ const mdgBot = async (browser, page) => {
         await page.type(selectors.homePhone, data.phone);
         await page.type(selectors.cellPhone, data.phone);
 
-        await page.click(selectors.agreeTerms);
+        await page.evaluate(() => {
+            document.querySelector('input[name="ctl00$ContentPlaceHolder1$Register1$ChkBigcheck"]').parentElement.click();
+        });
 
         const result = await page.solveRecaptchas();
         console.info(result);
 
         await page.click(selectors.submitBtn);
-        await page.waitForTimeout(1100);
+        await sleep(1.1);
         
         await page.waitForSelector(selectors.confirmationText, { timeout: 60000 });
 
@@ -68,19 +76,10 @@ const mdgBot = async (browser, page) => {
     }
 }
 
-// module.exports = async () => {
-//     const b = await createBrowser();
-//     if (!b) { console.error("Error while launching puppeteer browser!") };
-//     const { browser, page } = b;
-
-//     return await mdgBot(browser, page);
-// }
-
-(async () => {
+module.exports = async () => {
     const b = await createBrowser();
     if (!b) { console.error("Error while launching puppeteer browser!") };
     const { browser, page } = b;
 
-    const result = await mdgBot(browser, page);
-    console.log(result);
-})()
+    return await mdgBot(browser, page);
+}

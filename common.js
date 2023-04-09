@@ -21,12 +21,12 @@ puppeteer.use(
 
 const main = async () => {
     try {
-        const proxy = config.proxy;
+        const proxy = `http://${config.proxy.auth.username}:${config.proxy.auth.password}@${config.proxy.server}:${config.proxy.port}`;
         const anonymizedProxy = await proxyChain.anonymizeProxy(proxy);
 
         const browser = await puppeteer.launch({
             timeout: 0,
-            slowMo: 200,
+            slowMo: 50,
             ignoreHTTPSErrors: false,
             headless: false,
             args: [

@@ -1,12 +1,12 @@
 const { Browser, Page } = require("puppeteer");
 const createBrowser = require("./common");
-const { getData } = require("./utils");
+const { getData, sleep } = require("./utils");
 
 /**
  * @param {Browser} browser
  * @param {Page} page
  */
-const laddersBot = async (browser, page) => {
+const doSomethingBot = async (browser, page) => {
     try {
         const data = await getData();
 
@@ -48,8 +48,7 @@ const laddersBot = async (browser, page) => {
 
         await page.type(selectors.phoneNumber, data.phone);
         await page.click(selectors.submitBtn2);
-
-        await page.waitForTimeout(1100);
+        await sleep(1.2);
 
         return "success";
 
@@ -64,5 +63,5 @@ module.exports = async () => {
     if (!b) { console.error("Error while launching puppeteer browser!") };
     const { browser, page } = b;
 
-    return await laddersBot(browser, page);
+    return await doSomethingBot(browser, page);
 }
