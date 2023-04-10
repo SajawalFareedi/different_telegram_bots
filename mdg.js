@@ -61,7 +61,7 @@ const mdgBot = async (browser, page) => {
         });
 
         const result = await page.solveRecaptchas();
-        console.info(result);
+        // console.info(result);
 
         await page.click(selectors.submitBtn);
         await sleep(1.1);

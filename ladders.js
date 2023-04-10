@@ -34,7 +34,7 @@ const laddersBot = async (browser, page) => {
 
         if (page.url().indexOf("/challenge") !== -1) {
             const result = await page.solveRecaptchas();
-            console.info(result);
+            // console.info(result);
             await page.$eval('input[type="submit"]', btn => btn.click());
         }
 
@@ -46,19 +46,10 @@ const laddersBot = async (browser, page) => {
     }
 }
 
-// module.exports = async () => {
-//     const b = await createBrowser();
-//     if (!b) { console.error("Error while launching puppeteer browser!") };
-//     const { browser, page } = b;
-
-//     return await laddersBot(browser, page);
-// }
-
-(async () => {
+module.exports = async () => {
     const b = await createBrowser();
     if (!b) { console.error("Error while launching puppeteer browser!") };
     const { browser, page } = b;
 
-    const result = await laddersBot(browser, page);
-    console.log(result);
-})()
+    return await laddersBot(browser, page);
+}

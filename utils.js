@@ -5,30 +5,30 @@ const getData = async () => {
     try {
         // return (await axios.get("http://localhost:3000/data", { headers: { "content-type": "application/json" } })).data;
 
-        return {
-            "id": "123456789",
-            "firstName": "Harold G",
-            "lastName": "Aguayo",
-            "dob": {
-                "day": "07",
-                "month": "10",
-                "year": "1994"
-            },
-            "gender": "M",
-            "ssn": "694-01-7392",
-            "address": {
-                "street": "3609 Perine Street",
-                "city": "Centerville",
-                "state": "VA",
-                "zip": "22020"
-            },
-            "dl": "123232323",
-            "phone": "7038309931",
-            "email": "HaroldGAguayo@teleworm.us",
-            "employer": "Cut Rite",
-            "income": 7200,
-            "password": "VBghd#&^7272HH"
-        }
+        // return {
+        //     "id": "123456789",
+        //     "firstName": "Harold G",
+        //     "lastName": "Aguayo",
+        //     "dob": {
+        //         "day": "07",
+        //         "month": "10",
+        //         "year": "1994"
+        //     },
+        //     "gender": "M",
+        //     "ssn": "694-01-7392",
+        //     "address": {
+        //         "street": "3609 Perine Street",
+        //         "city": "Centerville",
+        //         "state": "VA",
+        //         "zip": "22020"
+        //     },
+        //     "dl": "123232323",
+        //     "phone": "7038309931",
+        //     "email": "HaroldGAguayo@teleworm.us",
+        //     "employer": "Cut Rite",
+        //     "income": 7200,
+        //     "password": "VBghd#&^7272HH"
+        // }
 
         // return {
         //     "id": "123456789",
@@ -54,6 +54,31 @@ const getData = async () => {
         //     "income": 7200,
         //     "password": "VBghd#&^7272HH"
         // }
+
+        return {
+            "id": "123456789",
+            "firstName": "Charles S",
+            "lastName": "Ryman",
+            "dob": {
+                "day": "27",
+                "month": "03",
+                "year": "1995"
+            },
+            "gender": "M",
+            "ssn": "523-33-8757",
+            "address": {
+                "street": "136 Sampson Street",
+                "city": "Kiowa",
+                "state": "CO",
+                "zip": "80117"
+            },
+            "dl": "123232323",
+            "phone": "3036216798",
+            "email": "CharlesSRyman@rhyta.com",
+            "employer": "The Lawn Guru",
+            "income": 7200,
+            "password": "VBghd#&^7272HH"
+        }
 
     } catch (error) {
         console.error(error);
